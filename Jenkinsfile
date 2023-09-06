@@ -35,8 +35,7 @@ pipeline {
             steps {
                 //sh 'chmod +x ./jenkins/scripts/deliver.sh'
                 //sh './jenkins/scripts/deliver.sh'
-                sh '''ssh ubuntu@13.208.172.148 mkdir -p /home/ubuntu/testjava
-                scp -r \'target/*.jar\' ubuntu@13.208.172.148:/home/ubuntu/testjava/'''
+                sshPublisher(publishers: [sshPublisherDesc(configName: 'tests', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'java -jar my-app-1.0-SNAPSHOT.jar', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'target/*.jar')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             }
         }
     }
