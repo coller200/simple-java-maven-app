@@ -15,12 +15,9 @@ pipeline {
                 // To run Maven on a Windows agent, use
                 // bat "mvn -Dmaven.test.failure.ignore=true clean package"
             }
-
-
         }
-    }
     
-    stage('Test') {
+        stage('Test') {
             steps {
                 sh 'mvn test'
             }
@@ -32,11 +29,12 @@ pipeline {
                     //archiveArtifacts 'target/*.jar'
                 }
             }
-    }
+        }
 
-    stage('Deliver') {
+        stage('Deliver') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
             }
         }
+    }
 }
